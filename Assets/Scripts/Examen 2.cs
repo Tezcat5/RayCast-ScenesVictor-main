@@ -50,6 +50,6 @@ public class Examen2 : MonoBehaviour
         }
 
         SceneManager.LoadScene(escenaDestino);
-        Cuenta = false
+        Cuenta = false;
     }
 }
