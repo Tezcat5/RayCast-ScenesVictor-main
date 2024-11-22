@@ -832,8 +832,8 @@ MonoBehaviour:
   cuentaAtrasDuracion: 5
   nombresObjetos:
   - Cube1
-  - Cube2
   - Sphere
+  - Cube2
   nombresEscenas:
   - Scene1 1
   - Scene1 2
