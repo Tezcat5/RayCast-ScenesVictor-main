@@ -6,25 +6,32 @@ using UnityEngine.SceneManagement;
 public class Examen2 : MonoBehaviour
 {
     public Text cuentaAtrasTexto;
+    
     public int cuentaAtrasDuracion = 5;
-    public string[] nombresObjetos;
-    public string[] nombresEscenas;
-    private bool estaContando = false;
+    
+    public string[] Objetos;
+    
+    public string[] Escenas;
+    
+    private bool Cuenta = false;
+
+
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
+
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
             {
-                for (int i = 0; i < nombresObjetos.Length; i++)
+                for (int i = 0; i < Objetos.Length; i++)
                 {
-                    if (hit.transform.name == nombresObjetos[i] && !estaContando)
+                    if (hit.transform.name == Objetos[i] && !Cuenta)
                     {
-                        StartCoroutine(CuentaAtras(nombresEscenas[i]));
+                        StartCoroutine(CuentaAtras(Escenas[i]));
                         break;
                     }
                 }
@@ -34,7 +41,7 @@ public class Examen2 : MonoBehaviour
 
     IEnumerator CuentaAtras(string escenaDestino)
     {
-        estaContando = true;
+        Cuenta = true;
 
         for (int i = cuentaAtrasDuracion; i >= 0; i--)
         {
@@ -43,6 +50,6 @@ public class Examen2 : MonoBehaviour
         }
 
         SceneManager.LoadScene(escenaDestino);
-        estaContando = false;
+        Cuenta = false;
     }
 }
