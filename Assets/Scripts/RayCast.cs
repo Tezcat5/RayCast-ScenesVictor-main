@@ -1,18 +1,48 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class RayCast : MonoBehaviour
+public class Examen2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Text cuentaAtrasTexto;
+    public int cuentaAtrasDuracion = 5;
+    public string[] nombresObjetos;
+    public string[] nombresEscenas;
+    private bool estaContando = false;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                for (int i = 0; i < nombresObjetos.Length; i++)
+                {
+                    if (hit.transform.name == nombresObjetos[i] && !estaContando)
+                    {
+                        StartCoroutine(CuentaAtras(nombresEscenas[i]));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    IEnumerator CuentaAtras(string escenaDestino)
+    {
+        estaContando = true;
+
+        for (int i = cuentaAtrasDuracion; i >= 0; i--)
+        {
+            cuentaAtrasTexto.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+
+        SceneManager.LoadScene(escenaDestino);
+        estaContando = false;
     }
 }
